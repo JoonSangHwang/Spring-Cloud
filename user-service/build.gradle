@@ -37,6 +37,10 @@ dependencies {
 	// Dev Tool
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+	// H2
+	runtimeOnly 'com.h2database:h2'
+
+	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
