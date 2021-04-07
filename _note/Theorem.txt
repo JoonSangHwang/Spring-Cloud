@@ -7,3 +7,24 @@
 
 * jar 파일 실행
   java -jar -Dserver.port=9004 ./target/user-service-0.0.1-SNAPSHOT.jar
+
+
+* API Gateway Service
+  API Gateway 없이는 MSA 앱들의 EndPoint 를 Client 가 가지고 있어야만 호출이 가능했다.
+  하지만 Client 와 MSA 앱들 사이에 API Gateway 를 둠으로써 다음과 같은 기능을 제공하였다.
+  인증 및 권한 부여 / 서비스 검색 통합 / 응답 캐싱 / 정책, 회로 차단기 및 QoS 다시 시도 / 속도제한
+  부하 분산 / 로깅, 추적, 상관 관계 / 헤더, 쿼리 문자열 및 청구 변환 / IP 허용 목록에 추가
+
+* Netflix Ribbon
+  Client Side Load Balancer 로 Client 에 Ribbon 을 설치하여 ip 와 port 가 아닌 서비스 이름으로 호출을 할 수 있었다.
+  또한 Ribbon 은 Health Check 기능도 제공한다.
+  Ribbon 은 초창기 Spring Cloud 에서 MSA 호출을 담당했던 Load Balancer 이다.
+  넷플릭스가 가지고 있던 Load Balancer 기술이 Ribbon 이라는 Service 가 되어 스프링 재단에 기부가 되어 사용되어왔다.
+  하지만 Ribbon 은 비동기화 처리가 잘 되지 않아 최근엔 사용하지 않게 되었고,
+  결국 Spring Cloud Ribbon 은 Spring boot 2.4 에서 Maintenance 상태가 되었다.
+  Maintenance 상태라는건 모듈을 유지, 관리해 두는것으로서 Spring Cloud 팀에서 더이상 이 모듈에 새로운 기능을 추가하지 않는다는 상태이다.
+  즉, 다음 버전에서 빠질수도 있는 상태이다.
+
+* Netflix Zuul
+  위에서 설명한 API Gateway 기능을 한다.
+  Zuul 역시 Spring boot 2.4 에서 Maintenance 상태가 되었다.
