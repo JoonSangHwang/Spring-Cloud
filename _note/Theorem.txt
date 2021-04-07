@@ -28,3 +28,7 @@
 * Netflix Zuul
   위에서 설명한 API Gateway 기능을 한다.
   Zuul 역시 Spring boot 2.4 에서 Maintenance 상태가 되었다.
+
+* 게이트웨이 필터 순서
+  Gateway Client -> Gateway Handler -> Global Filter -> Custom Filter -> Logging Filter -> Proxied Service ─┐
+  Gateway Client <- Gateway Handler <- Global Filter <- Custom Filter <- Logging Filter <- Proxied Service <┘
