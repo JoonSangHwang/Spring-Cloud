@@ -3,8 +3,9 @@ package com.example.userservice.service;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.entity.User;
 import com.example.userservice.repository.UserRepository;
-import com.netflix.discovery.converters.Auto;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -15,14 +16,11 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -39,7 +37,9 @@ public class UserServiceImpl implements UserService {
 //        user.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
 
         userRepository.save(user);
+        
+        UserDto retUserDto = modelMapper.map(user, UserDto.class);
 
-        return null;
+        return retUserDto;
     }
 }

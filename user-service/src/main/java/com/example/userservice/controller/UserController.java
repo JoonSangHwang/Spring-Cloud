@@ -1,25 +1,27 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.dto.RequestUser;
+import com.example.userservice.dto.ResponseUser;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Value("${greeting.message}")
     private String greetingMessage;
@@ -35,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public String createUser(@RequestBody RequestUser user) {
+    public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user) {
 
         // ModelMapper 설정 변경
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -43,6 +45,8 @@ public class UserController {
         UserDto userDto = modelMapper.map(user, UserDto.class);
         userService.createUser(userDto);
 
-        return "Create user method is called";
+        ResponseUser responseUser = modelMapper.map(userDto, ResponseUser.class);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
 }
