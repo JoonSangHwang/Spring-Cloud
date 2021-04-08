@@ -49,6 +49,9 @@ dependencies {
 	// Hateoas
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

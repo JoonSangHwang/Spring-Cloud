@@ -42,11 +42,13 @@ public class UserController {
         // ModelMapper 설정 변경
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
+        // [S] 저장 Service 호출
         UserDto userDto = modelMapper.map(user, UserDto.class);
         userService.createUser(userDto);
+        // [E] 저장 Service 호출
 
+        // 결과값 반환
         ResponseUser responseUser = modelMapper.map(userDto, ResponseUser.class);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
 }

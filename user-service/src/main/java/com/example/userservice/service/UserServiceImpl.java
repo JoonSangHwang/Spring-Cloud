@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -31,15 +33,15 @@ public class UserServiceImpl implements UserService {
         // ModelMapper 설정 변경
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        // 변환
+        // 저장을 위한 변환
         User user = modelMapper.map(userDto, User.class);
-        user.setEncryptedPwd("encrypted_password");
-//        user.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
+        user.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
 
+        // 유저 생성 !!!
         userRepository.save(user);
-        
-        UserDto retUserDto = modelMapper.map(user, UserDto.class);
 
+        // 반환을 위한 변환
+        UserDto retUserDto = modelMapper.map(user, UserDto.class);
         return retUserDto;
     }
 }
