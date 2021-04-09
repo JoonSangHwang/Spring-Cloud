@@ -1,5 +1,6 @@
 package com.example.userservice.service;
 
+import com.example.userservice.dto.ResponseOrder;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.entity.User;
 import com.example.userservice.repository.UserRepository;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -43,5 +46,20 @@ public class UserServiceImpl implements UserService {
         // 반환을 위한 변환
         UserDto retUserDto = modelMapper.map(user, UserDto.class);
         return retUserDto;
+    }
+
+    @Override
+    public UserDto getUserByUserId(String userId) {
+        User user = userRepository.findByUserId(userId);
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+
+        List<ResponseOrder> orders = new ArrayList<>();
+        userDto.setOrders(orders);
+        return null;
+    }
+
+    @Override
+    public Iterable<User> getUserByAll() {
+        return userRepository.findAll();
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
@@ -36,7 +37,7 @@ class UserControllerTest {
                 .pwd("test1234")
                 .build();
 
-        mockMvc.perform(post("/users")
+        mockMvc.perform(post("/user-service/users")
                     .contentType(MediaType.APPLICATION_JSON_VALUE)    // Header의 Content-Type
                     .accept(MediaTypes.HAL_JSON_VALUE)                // 요구 Content-Type
                     .content(objectMapper.writeValueAsString(userDto))
@@ -44,4 +45,16 @@ class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated());
     }
+
+    @Test
+    @DisplayName("유저 전체 조회 - [정상] 테스트")
+    public void getUsers() throws Exception {
+        mockMvc.perform(get("/user-service/users")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)    // Header의 Content-Type
+                .accept(MediaTypes.HAL_JSON_VALUE)                // 요구 Content-Type
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 }

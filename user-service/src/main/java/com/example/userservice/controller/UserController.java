@@ -3,6 +3,7 @@ package com.example.userservice.controller;
 import com.example.userservice.dto.RequestUser;
 import com.example.userservice.dto.ResponseUser;
 import com.example.userservice.dto.UserDto;
+import com.example.userservice.entity.User;
 import com.example.userservice.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("/user-service")
+@RequestMapping("/user-service/")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -39,6 +43,10 @@ public class UserController {
         return greetingMessage;
     }
 
+
+    /**
+     * 유저 생성
+     */
     @PostMapping("/users")
     public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user) {
 
@@ -53,5 +61,34 @@ public class UserController {
         // 결과값 반환
         ResponseUser responseUser = modelMapper.map(userDto, ResponseUser.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
+    }
+
+
+    /**
+     * 유저 전체 조회
+     */
+    @GetMapping("/users")
+    public ResponseEntity<List<ResponseUser>> getUsers() {
+        Iterable<User> userList = userService.getUserByAll();
+
+        List<ResponseUser> result = new ArrayList<>();
+        userList.forEach(v -> {
+            result.add(modelMapper.map(v, ResponseUser.class));
+        });
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+
+    /**
+     * 유저 조회
+     */
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") String userId) {
+        UserDto userDto = userService.getUserByUserId(userId);
+
+        ResponseUser returnValue = modelMapper.map(userDto, ResponseUser.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(returnValue);
     }
 }
