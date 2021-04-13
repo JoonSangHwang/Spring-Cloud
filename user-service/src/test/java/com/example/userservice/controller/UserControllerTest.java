@@ -1,11 +1,10 @@
 package com.example.userservice.controller;
 
-import com.example.userservice.dto.RequestUser;
-import com.example.userservice.dto.UserDto;
+import com.example.userservice.user.dto.RequestUser;
+import com.example.userservice.user.dto.UserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.example.userservice.dto;
+package com.example.userservice.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

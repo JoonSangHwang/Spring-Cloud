@@ -1,6 +1,5 @@
-package com.example.userservice.repository;
+package com.example.userservice.user;
 
-import com.example.userservice.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {

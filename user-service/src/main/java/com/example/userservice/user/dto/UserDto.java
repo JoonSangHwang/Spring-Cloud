@@ -1,6 +1,5 @@
-package com.example.userservice.dto;
+package com.example.userservice.user.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;

@@ -1,15 +1,11 @@
-package com.example.userservice.controller;
+package com.example.userservice.user;
 
-import com.example.userservice.dto.RequestUser;
-import com.example.userservice.dto.ResponseUser;
-import com.example.userservice.dto.UserDto;
-import com.example.userservice.entity.User;
-import com.example.userservice.service.UserService;
-import lombok.AllArgsConstructor;
+import com.example.userservice.user.dto.RequestUser;
+import com.example.userservice.user.dto.ResponseUser;
+import com.example.userservice.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
