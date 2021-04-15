@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +58,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public Iterable<User> getUserByAll() {
         return userRepository.findAll();
+    }
+
+    /**
+     * 로그인 요청
+     * - DB 에서 유저 조회 후, 존재하는 유저일 경우 반환
+     * - User 객체를 사용하여, UserDetails 객체를 반환 하도록 함
+     */
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(username);
+
+        if (user == null)
+            throw new UsernameNotFoundException(username);
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(), user.getEncryptedPwd(),true,true,true,true,new ArrayList<>());
     }
 }

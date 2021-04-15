@@ -1,8 +1,14 @@
 package com.example.userservice.security.filter;
 
+import com.example.userservice.user.UserService;
+import com.example.userservice.user.dto.RequestLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -15,10 +21,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@RequiredArgsConstructor
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private final ModelMapper modelMapper;
+    private ModelMapper modelMapper;
+    private UserService userService;
+
+    public AuthenticationFilter() {
+
+    }
+
+    @Autowired
+    public AuthenticationFilter(AuthenticationManager authenticationManager, ModelMapper modelMapper, UserService userService) {
+        super.setAuthenticationManager(authenticationManager);
+        this.modelMapper = modelMapper;
+        this.userService = userService;
+    }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
