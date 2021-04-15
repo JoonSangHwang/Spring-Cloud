@@ -30,7 +30,11 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
 
 
             if (config.isPreLogger()) {
+                log.info("Global Filter Start: request local address -> {}", request.getLocalAddress());
+                log.info("Global Filter Start: request remote address -> {}", request.getRemoteAddress());
+                log.info("Global Filter Start: request uri -> {}", request.getURI());
                 log.info("Global Filter Start: request id -> {}", request.getId());
+                log.info("Global Filter Start: request Coockies -> {}", request.getCookies());
             }
 
             // Custom Post Filter

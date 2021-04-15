@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/catalog-service")
+@RequestMapping("/catalogs-service")
 @RequiredArgsConstructor
 public class CatalogController {
 
