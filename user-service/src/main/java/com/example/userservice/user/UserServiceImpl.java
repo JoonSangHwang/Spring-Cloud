@@ -60,6 +60,17 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    @Override
+    public UserDto getUserDetailsByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null)
+            throw new UsernameNotFoundException(email);
+
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+        return userDto;
+    }
+
     /**
      * 로그인 요청
      * - DB 에서 유저 조회 후, 존재하는 유저일 경우 반환
