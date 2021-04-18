@@ -40,3 +40,13 @@
 * 게이트웨이 필터 순서
   Gateway Client -> Gateway Handler -> Global Filter -> Custom Filter -> Logging Filter -> Proxied Service ─┐
   Gateway Client <- Gateway Handler <- Global Filter <- Custom Filter <- Logging Filter <- Proxied Service <┘
+
+
+
+* JWT (JSON Web Token)
+  https://jwt.io/ 사이트에서 토큰 해독 가능
+
+  인증 헤더 내에서 사용되는 토큰 포맷
+  두 개의 시스템끼리 안전한 방법으로 통신 가능
+  독립적으로 클라이언트와 통신이 가능하다. (stateless)
+  No Cookie-Session (NO CSRF, 사이트간 요청 위조)
