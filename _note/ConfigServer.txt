@@ -1,0 +1,26 @@
+* Spring Cloud Config
+  - 설정 정보(application.yml)를 외부 시스템에서 관리
+  - 하나의 중앙화 된 저장소에서 구성요소 관리 기능
+  - 각 MSA 서비스를 다시 빌드하지 않고, 바로 적용이 가능
+  - 배포 파이프라인을 통해 DEV - UAT - PROD
+
+  ==========================================================================
+  Development : Develop and test applications. Definitely Developer Edition.
+  UAT : Acceptance test and sign-off. Developer Edition ? Or Standard ?
+  Prod : Production. Standard Edition.
+  ==========================================================================
+
+  - Private Git Repository
+  - Secure Vault (암호화 데이터)
+  - Secure File Storage
+
+
+* Changed Configuration Values
+  - 서버 재기동 (비추)
+  - Actuator refresh (스프링부트 Actuator 기능 Refresh 사용)
+    : Springboot Actuator 란?
+      Application 상태, 모니터링할 수 있는 기능
+      Metric 수집을 위한 HTTP endpoint 제공
+    : 실행 명령어 (꼭 post 방식으로 요청)
+      [POST] 127.0.0.1:7011/actuator/refresh
+  - Spring Cloud Bus 사용 (스트링부트 Cloud Bus 기능)

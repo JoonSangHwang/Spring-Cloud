@@ -52,16 +52,3 @@
   No Cookie-Session (NO CSRF, 사이트간 요청 위조)
 
 
-* Spring Cloud Config
-  설정 정보(application.yml)를 외부 시스템에서 관리
-  하나의 중앙화 된 저장소에서 구성요소 관리 기능
-  각 MSA 서비스를 다시 빌드하지 않고, 바로 적용이 가능
-  배포 파이프라인을 통해 DEV - UAT - PROD
-
-  Development : Develop and test applications. Definitely Developer Edition.
-  UAT : Acceptance test and sign-off. Developer Edition ? Or Standard ?
-  Prod : Production. Standard Edition.
-
-  - Private Git Repository
-  - Secure Vault (암호화 데이터)
-  - Secure File Storage

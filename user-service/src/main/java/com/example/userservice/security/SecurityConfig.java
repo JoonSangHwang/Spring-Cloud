@@ -28,9 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/users/**")
-//                .permitAll()
-                .hasIpAddress("")
+                .antMatchers("/actuator/**").permitAll()
+//                .antMatchers("/users/**").permitAll()
+                .antMatchers("/**").hasIpAddress("")
         .and()
                 .addFilter(getAuthenticationFilter())
         ;
