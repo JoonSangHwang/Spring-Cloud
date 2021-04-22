@@ -40,6 +40,15 @@ dependencies {
 	// JAXB(Java Architecture for XML Binding) API
 	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.1'
 
+	// Cloud Config
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-config'
+
+	// Bootstrap
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bootstrap'
+
+	// actuator [https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator]
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
