@@ -1,0 +1,15 @@
+* Apache Kafka
+  - Apache Software Foundation의 Scalar 언어로 된 오픈 소스 Message Broker Project
+  - Linked In 에서 개발되었고 2011년 오픈 소스화 됨
+  - 2014년 링크드인 카프카 엔지니들이 Kafka 개발에 집중하기 위해 Confluent 라는 회사 창립
+  - 실시간 데이터 피드를 관리하기 위해 통일된 높은 처리량, 낮은 지연 시간을 지닌 플랫폼 제공
+
+  - Producer/Consumer 분리
+  - Scale-out 가능
+
+  - 기본적으로 3대 이상의 Broker Cluster 구성
+  - Zookeeper 연동
+    : 메타데이터(Broker ID, Controller ID 등) 저장
+
+  - N개의 브로커 중 1대는 Controller 기능을 수행함
+    : Controller 의 역할은 각 브로커에게 담당 파티션 할당을 수행하며 브로커의 정상 동작 모니터링을 관리함

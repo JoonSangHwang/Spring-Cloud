@@ -24,3 +24,12 @@
     : 실행 명령어 (꼭 post 방식으로 요청)
       [POST] 127.0.0.1:7011/actuator/refresh
   - Spring Cloud Bus 사용 (스트링부트 Cloud Bus 기능)
+    :
+
+
+* 프로파일을 사용하여 설정파일 적용
+  1. 프로파일 지정
+  spring.profiles.active = dev
+
+  2. VM 옵션
+  Active profiles: dev / prod
